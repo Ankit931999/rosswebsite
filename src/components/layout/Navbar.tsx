@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 interface NavItem {
   label: string;
@@ -33,7 +32,6 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -77,7 +75,6 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
@@ -89,12 +86,11 @@ export const Navbar: React.FC = () => {
                 {item.label}
               </a>
             ))}
-            <Button onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}>
               Get Started
             </Button>
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             id="menu-button"
             className="md:hidden text-brand-700 hover:text-brand-500 transition-colors"
@@ -105,7 +101,6 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       <div
         id="mobile-menu"
         className={cn(
@@ -127,7 +122,7 @@ export const Navbar: React.FC = () => {
             ))}
             <Button onClick={() => {
               setIsOpen(false);
-              document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
             }}>
               Get Started
             </Button>

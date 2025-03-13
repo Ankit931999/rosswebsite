@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Check } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 export const About: React.FC = () => {
   const keyPoints = [
@@ -48,7 +48,7 @@ export const About: React.FC = () => {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button onClick={() => scrollToSection('#testimonials')}>Learn Our Story</Button>
-                <Button variant="outline" onClick={() => scrollToSection('#services')}>Meet Our Team</Button>
+                <Button variant="outline" onClick={() => scrollToSection('#contact')}>Contact Us</Button>
               </div>
             </div>
           </div>
