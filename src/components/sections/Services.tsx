@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Globe, Cloud, Shield, Database, Code, BarChart } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 interface ServiceCardProps {
   title: string;
@@ -47,6 +48,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, del
 );
 
 export const Services: React.FC = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId);
     if (element) {
@@ -59,37 +62,37 @@ export const Services: React.FC = () => {
       title: 'Digital Transformation',
       description: 'Reimagine your business models and processes for the digital age.',
       icon: <Globe size={24} />,
-      targetSection: '#about'
+      id: 'digital-transformation'
     },
     {
       title: 'Cloud Services',
       description: 'Accelerate innovation with secure, scalable cloud solutions.',
       icon: <Cloud size={24} />,
-      targetSection: '#testimonials'
+      id: 'cloud-services'
     },
     {
       title: 'Cybersecurity',
       description: 'Protect your assets with our advanced security framework.',
       icon: <Shield size={24} />,
-      targetSection: '#about'
+      id: 'cybersecurity'
     },
     {
       title: 'Data Analytics',
       description: 'Transform data into actionable insights for your business.',
       icon: <Database size={24} />,
-      targetSection: '#testimonials'
+      id: 'data-analytics'
     },
     {
       title: 'Application Development',
       description: 'Custom solutions built for your unique business needs.',
       icon: <Code size={24} />,
-      targetSection: '#about'
+      id: 'application-development'
     },
     {
       title: 'Business Intelligence',
       description: 'Make data-driven decisions with our BI solutions.',
       icon: <BarChart size={24} />,
-      targetSection: '#testimonials'
+      id: 'business-intelligence'
     },
   ];
 
@@ -114,7 +117,7 @@ export const Services: React.FC = () => {
               description={service.description}
               icon={service.icon}
               delay={index * 100}
-              onLearnMore={() => scrollToSection(service.targetSection)}
+              onLearnMore={() => navigate(`/services/${service.id}`)}
             />
           ))}
         </div>
