@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Globe, Cloud, Shield, Database, Code, BarChart } from 'lucide-react';
+import { Globe, Cloud, Shield, Database, Code, BarChart, Monitor, Server, Smartphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
@@ -50,13 +50,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, del
 export const Services: React.FC = () => {
   const navigate = useNavigate();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const services = [
     {
       title: 'Digital Transformation',
@@ -94,6 +87,24 @@ export const Services: React.FC = () => {
       icon: <BarChart size={24} />,
       id: 'business-intelligence'
     },
+    {
+      title: 'CRM Services',
+      description: 'Streamline customer relationships and improve sales processes.',
+      icon: <Monitor size={24} />,
+      id: 'crm-services'
+    },
+    {
+      title: 'Web Services',
+      description: 'Dynamic, responsive web solutions for your online presence.',
+      icon: <Server size={24} />,
+      id: 'web-services'
+    },
+    {
+      title: 'Software Solutions',
+      description: 'Tailored software solutions that drive business efficiency.',
+      icon: <Smartphone size={24} />,
+      id: 'software-solutions'
+    },
   ];
 
   return (
@@ -120,12 +131,6 @@ export const Services: React.FC = () => {
               onLearnMore={() => navigate(`/services/${service.id}`)}
             />
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <Button size="lg" onClick={() => scrollToSection('#about')}>
-            View All Services
-          </Button>
         </div>
       </div>
     </section>

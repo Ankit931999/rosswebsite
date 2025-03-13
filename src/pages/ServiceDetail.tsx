@@ -108,6 +108,51 @@ const servicesData: Record<string, ServiceData> = {
     ],
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'
+  },
+  'crm-services': {
+    id: 'crm-services',
+    title: 'CRM Services',
+    description: 'Streamline customer relationships and improve sales processes.',
+    longDescription: 'Our CRM services help businesses better manage customer interactions and relationships throughout the customer lifecycle. We implement customized CRM solutions that streamline sales processes, improve customer service, and drive customer loyalty and retention.',
+    features: [
+      'CRM implementation & integration',
+      'Sales process automation',
+      'Customer service optimization',
+      'Marketing automation',
+      'CRM analytics & reporting'
+    ],
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop'
+  },
+  'web-services': {
+    id: 'web-services',
+    title: 'Web Services',
+    description: 'Dynamic, responsive web solutions for your online presence.',
+    longDescription: 'Our web services offer comprehensive solutions for businesses looking to establish or enhance their online presence. We create responsive, user-friendly websites and web applications that engage visitors, drive conversions, and represent your brand effectively in the digital space.',
+    features: [
+      'Responsive website design',
+      'E-commerce development',
+      'Content management systems',
+      'Website optimization',
+      'Progressive web applications'
+    ],
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    imageUrl: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2128&auto=format&fit=crop'
+  },
+  'software-solutions': {
+    id: 'software-solutions',
+    title: 'Software Solutions',
+    description: 'Tailored software solutions that drive business efficiency.',
+    longDescription: 'Our software solutions are designed to address the unique challenges and requirements of your business. We develop customized software applications that automate processes, improve productivity, and help you achieve your business objectives with greater efficiency.',
+    features: [
+      'Enterprise software development',
+      'Software architecture design',
+      'Legacy software modernization',
+      'Quality assurance & testing',
+      'Ongoing maintenance & support'
+    ],
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    imageUrl: 'https://images.unsplash.com/photo-1623479322729-28b25c16b011?q=80&w=2070&auto=format&fit=crop'
   }
 };
 
