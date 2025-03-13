@@ -10,13 +10,23 @@ const FooterSection = ({ title, children }: { title: string; children: React.Rea
 );
 
 export const Footer: React.FC = () => {
+  const navigateTo = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-brand-50 border-t border-brand-100">
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="flex flex-col space-y-4">
-            <a href="#" className="inline-block">
-              <span className="font-bold text-xl text-brand-900">Wipro<span className="text-brand-500">.</span></span>
+            <a href="#" className="inline-block" onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}>
+              <span className="font-bold text-xl text-brand-900">ROSS<span className="text-brand-500">.</span></span>
             </a>
             <p className="text-brand-700 max-w-xs">
               Delivering innovative business solutions with cutting-edge technology, empowering global enterprises to thrive in the digital era.
@@ -41,7 +51,14 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3">
               {['Digital Transformation', 'Cloud Services', 'AI & Analytics', 'Cybersecurity', 'Business Process'].map((service) => (
                 <li key={service}>
-                  <a href="#" className="text-brand-700 hover:text-brand-500 transition-colors">
+                  <a 
+                    href="#services" 
+                    className="text-brand-700 hover:text-brand-500 transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo('#services');
+                    }}
+                  >
                     {service}
                   </a>
                 </li>
@@ -51,10 +68,24 @@ export const Footer: React.FC = () => {
 
           <FooterSection title="Company">
             <ul className="space-y-3">
-              {['About Us', 'Leadership', 'Careers', 'News & Events', 'Investors', 'Sustainability'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-brand-700 hover:text-brand-500 transition-colors">
-                    {item}
+              {[
+                { name: 'About Us', section: '#about' },
+                { name: 'Leadership', section: '#about' },
+                { name: 'Careers', section: '#services' },
+                { name: 'News & Events', section: '#services' },
+                { name: 'Investors', section: '#about' },
+                { name: 'Sustainability', section: '#about' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <a 
+                    href={item.section} 
+                    className="text-brand-700 hover:text-brand-500 transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo(item.section);
+                    }}
+                  >
+                    {item.name}
                   </a>
                 </li>
               ))}
@@ -80,7 +111,7 @@ export const Footer: React.FC = () => {
 
         <div className="border-t border-brand-100 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-brand-700 text-sm">
-            © {new Date().getFullYear()} Wipro. All rights reserved.
+            © {new Date().getFullYear()} ROSS. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="#" className="text-brand-700 hover:text-brand-500 text-sm transition-colors">

@@ -23,6 +23,13 @@ export const Hero: React.FC = () => {
     };
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16">
       {/* Background effect */}
@@ -51,11 +58,19 @@ export const Hero: React.FC = () => {
               Partner with us to unlock digital potential and drive innovation across your enterprise with our comprehensive suite of IT solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="group">
+              <Button 
+                size="lg" 
+                className="group"
+                onClick={() => scrollToSection('#services')}
+              >
                 Get Started 
                 <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => scrollToSection('#about')}
+              >
                 Learn More
               </Button>
             </div>

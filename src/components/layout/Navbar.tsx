@@ -46,6 +46,20 @@ export const Navbar: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (isOpen) setIsOpen(false);
+    
+    if (href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <header 
       className={cn(
@@ -58,8 +72,8 @@ export const Navbar: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <a href="#" className="flex items-center space-x-2">
-              <span className="font-bold text-xl sm:text-2xl text-brand-900">Wipro<span className="text-brand-500">.</span></span>
+            <a href="#" className="flex items-center space-x-2" onClick={(e) => handleNavigation(e, '#')}>
+              <span className="font-bold text-xl sm:text-2xl text-brand-900">ROSS<span className="text-brand-500">.</span></span>
             </a>
           </div>
 
@@ -70,11 +84,14 @@ export const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 className="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors"
+                onClick={(e) => handleNavigation(e, item.href)}
               >
                 {item.label}
               </a>
             ))}
-            <Button>Get Started</Button>
+            <Button onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}>
+              Get Started
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -103,12 +120,17 @@ export const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 className="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors py-2"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleNavigation(e, item.href)}
               >
                 {item.label}
               </a>
             ))}
-            <Button className="mt-2">Get Started</Button>
+            <Button onClick={() => {
+              setIsOpen(false);
+              document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
+              Get Started
+            </Button>
           </nav>
         </div>
       </div>

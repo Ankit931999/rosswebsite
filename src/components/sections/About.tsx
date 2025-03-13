@@ -12,6 +12,13 @@ export const About: React.FC = () => {
     'Commitment to sustainability and social responsibility',
   ];
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="about" className="section-padding bg-brand-50">
       <div className="container mx-auto px-4 md:px-6">
@@ -25,7 +32,7 @@ export const About: React.FC = () => {
                 Driving Business Transformation Through Technology
               </h2>
               <p className="text-brand-700 mb-6">
-                We are a global technology services company with a mission to help businesses thrive in the digital economy. With a blend of strategy, technology, and design, we deliver impactful solutions that drive growth and efficiency.
+                At ROSS, we are a global technology services company with a mission to help businesses thrive in the digital economy. With a blend of strategy, technology, and design, we deliver impactful solutions that drive growth and efficiency.
               </p>
               
               <ul className="space-y-3 mb-8">
@@ -40,8 +47,8 @@ export const About: React.FC = () => {
               </ul>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button>Learn Our Story</Button>
-                <Button variant="outline">Meet Our Team</Button>
+                <Button onClick={() => scrollToSection('#testimonials')}>Learn Our Story</Button>
+                <Button variant="outline" onClick={() => scrollToSection('#services')}>Meet Our Team</Button>
               </div>
             </div>
           </div>

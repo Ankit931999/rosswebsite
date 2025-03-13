@@ -8,9 +8,10 @@ interface ServiceCardProps {
   description: string;
   icon: React.ReactNode;
   delay?: number;
+  onLearnMore: () => void;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, delay = 0 }) => (
+const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, delay = 0, onLearnMore }) => (
   <div 
     className="staggered-item glass-card rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
     style={{ animationDelay: `${delay}ms` }}
@@ -20,7 +21,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, del
     </div>
     <h3 className="text-xl font-semibold text-brand-900 mb-2">{title}</h3>
     <p className="text-brand-700 mb-4">{description}</p>
-    <Button variant="link" className="p-0 h-auto text-brand-500 hover:text-brand-600 group">
+    <Button 
+      variant="link" 
+      className="p-0 h-auto text-brand-500 hover:text-brand-600 group"
+      onClick={onLearnMore}
+    >
       Learn More
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,36 +47,49 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, del
 );
 
 export const Services: React.FC = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const services = [
     {
       title: 'Digital Transformation',
       description: 'Reimagine your business models and processes for the digital age.',
       icon: <Globe size={24} />,
+      targetSection: '#about'
     },
     {
       title: 'Cloud Services',
       description: 'Accelerate innovation with secure, scalable cloud solutions.',
       icon: <Cloud size={24} />,
+      targetSection: '#testimonials'
     },
     {
       title: 'Cybersecurity',
       description: 'Protect your assets with our advanced security framework.',
       icon: <Shield size={24} />,
+      targetSection: '#about'
     },
     {
       title: 'Data Analytics',
       description: 'Transform data into actionable insights for your business.',
       icon: <Database size={24} />,
+      targetSection: '#testimonials'
     },
     {
       title: 'Application Development',
       description: 'Custom solutions built for your unique business needs.',
       icon: <Code size={24} />,
+      targetSection: '#about'
     },
     {
       title: 'Business Intelligence',
       description: 'Make data-driven decisions with our BI solutions.',
       icon: <BarChart size={24} />,
+      targetSection: '#testimonials'
     },
   ];
 
@@ -96,12 +114,13 @@ export const Services: React.FC = () => {
               description={service.description}
               icon={service.icon}
               delay={index * 100}
+              onLearnMore={() => scrollToSection(service.targetSection)}
             />
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <Button size="lg">
+          <Button size="lg" onClick={() => scrollToSection('#about')}>
             View All Services
           </Button>
         </div>
