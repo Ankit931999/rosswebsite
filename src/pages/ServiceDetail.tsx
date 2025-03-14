@@ -62,7 +62,7 @@ const servicesData: Record<string, ServiceData> = {
       'Security operations center (SOC)',
       'Compliance & risk management'
     ],
-    videoUrl: '/videos/cybersecurity.mp4',
+    videoUrl: 'https://ankitvermawebsite.s3.eu-north-1.amazonaws.com/Videos/Cybersecurity.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop'
   },
   'data-analytics': {
