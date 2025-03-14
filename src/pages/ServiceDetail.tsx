@@ -1,11 +1,26 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { initializeAnimations } from '@/utils/animations';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { useToast } from '@/hooks/use-toast';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormDescription,
+} from '@/components/ui/form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 // Define service data type
 interface ServiceData {
@@ -157,6 +172,173 @@ const servicesData: Record<string, ServiceData> = {
   }
 };
 
+// Form schema for cybersecurity consultation
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  company: z.string().min(1, {
+    message: "Company name is required.",
+  }),
+  phone: z.string().optional(),
+  message: z.string().min(10, {
+    message: "Message must be at least 10 characters.",
+  }),
+  consent: z.boolean().refine(value => value === true, {
+    message: "You must agree to contact terms.",
+  }),
+});
+
+// Custom form component for cybersecurity page
+const CybersecurityForm = () => {
+  const { toast } = useToast();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      company: "",
+      phone: "",
+      message: "",
+      consent: false,
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // This would be replaced with actual form submission logic
+    console.log(values);
+    
+    // Show success message
+    toast({
+      title: "Consultation request submitted",
+      description: "Thank you! Our cybersecurity team will contact you shortly.",
+    });
+    
+    // Reset form
+    form.reset();
+  }
+
+  return (
+    <div className="bg-gradient-to-br from-brand-50 to-slate-100 p-6 md:p-10 rounded-xl shadow-md animate-on-scroll">
+      <h3 className="text-2xl font-bold text-brand-900 mb-6">Request a Cybersecurity Consultation</h3>
+      <p className="text-brand-700 mb-8">
+        Complete the form below to discuss your security challenges with our experts. We'll analyze your needs and propose a tailored cybersecurity solution.
+      </p>
+      
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John Doe" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email Address</FormLabel>
+                  <FormControl>
+                    <Input placeholder="your@email.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="company"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Company Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Your Company" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number (Optional)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="+1 (123) 456-7890" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tell us about your security needs</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    placeholder="Please describe your cybersecurity challenges or requirements..." 
+                    className="min-h-[120px]"
+                    {...field} 
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="consent"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>
+                    I agree to be contacted about my cybersecurity needs
+                  </FormLabel>
+                  <FormDescription>
+                    We'll never share your information with third parties.
+                  </FormDescription>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <Button type="submit" className="w-full md:w-auto">
+            Submit Request
+          </Button>
+        </form>
+      </Form>
+    </div>
+  );
+};
+
 const ServiceDetail: React.FC = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
   const navigate = useNavigate();
@@ -239,9 +421,11 @@ const ServiceDetail: React.FC = () => {
               </div>
 
               <div className="mt-12">
-                <Button size="lg" onClick={() => navigate('/contact')}>
-                  Get Started
-                </Button>
+                {serviceId !== 'cybersecurity' && (
+                  <Button size="lg" onClick={() => navigate('/contact')}>
+                    Get Started
+                  </Button>
+                )}
               </div>
             </div>
 
@@ -277,15 +461,21 @@ const ServiceDetail: React.FC = () => {
             </p>
           </div>
 
-          <div className="mt-16 text-center animate-on-scroll">
-            <h2 className="text-2xl md:text-3xl font-bold text-brand-900 mb-4">Ready to Transform Your Business?</h2>
-            <p className="text-xl text-brand-700 mb-8 max-w-3xl mx-auto">
-              Contact our team of experts to learn how our {serviceData.title} solutions can help your organization.
-            </p>
-            <Button size="lg" onClick={() => navigate('/contact')}>
-              Contact Us
-            </Button>
-          </div>
+          {serviceId === 'cybersecurity' ? (
+            <div className="mt-16 animate-on-scroll">
+              <CybersecurityForm />
+            </div>
+          ) : (
+            <div className="mt-16 text-center animate-on-scroll">
+              <h2 className="text-2xl md:text-3xl font-bold text-brand-900 mb-4">Ready to Transform Your Business?</h2>
+              <p className="text-xl text-brand-700 mb-8 max-w-3xl mx-auto">
+                Contact our team of experts to learn how our {serviceData.title} solutions can help your organization.
+              </p>
+              <Button size="lg" onClick={() => navigate('/contact')}>
+                Contact Us
+              </Button>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
