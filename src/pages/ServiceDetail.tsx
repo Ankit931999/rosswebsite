@@ -1,10 +1,11 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { initializeAnimations } from '@/utils/animations';
 
 // Define service data type
 interface ServiceData {
@@ -31,7 +32,7 @@ const servicesData: Record<string, ServiceData> = {
       'Technology roadmap development',
       'Change management and adoption'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/digital-transformation.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop'
   },
   'cloud-services': {
@@ -46,7 +47,7 @@ const servicesData: Record<string, ServiceData> = {
       'Cloud cost optimization',
       'Managed cloud services'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/cloud-services.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'
   },
   'cybersecurity': {
@@ -61,7 +62,7 @@ const servicesData: Record<string, ServiceData> = {
       'Security operations center (SOC)',
       'Compliance & risk management'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/cybersecurity.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop'
   },
   'data-analytics': {
@@ -76,7 +77,7 @@ const servicesData: Record<string, ServiceData> = {
       'Business intelligence',
       'AI & machine learning integration'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/data-analytics.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop'
   },
   'application-development': {
@@ -91,7 +92,7 @@ const servicesData: Record<string, ServiceData> = {
       'API integration',
       'Legacy system modernization'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/app-development.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop'
   },
   'business-intelligence': {
@@ -106,7 +107,7 @@ const servicesData: Record<string, ServiceData> = {
       'KPI development & tracking',
       'Data governance & quality'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/business-intelligence.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'
   },
   'crm-services': {
@@ -121,7 +122,7 @@ const servicesData: Record<string, ServiceData> = {
       'Marketing automation',
       'CRM analytics & reporting'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/crm-services.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop'
   },
   'web-services': {
@@ -136,7 +137,7 @@ const servicesData: Record<string, ServiceData> = {
       'Website optimization',
       'Progressive web applications'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/web-services.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2128&auto=format&fit=crop'
   },
   'software-solutions': {
@@ -151,7 +152,7 @@ const servicesData: Record<string, ServiceData> = {
       'Quality assurance & testing',
       'Ongoing maintenance & support'
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: '/videos/software-solutions.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1623479322729-28b25c16b011?q=80&w=2070&auto=format&fit=crop'
   }
 };
@@ -160,6 +161,7 @@ const ServiceDetail: React.FC = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
   const navigate = useNavigate();
   const serviceData = serviceId ? servicesData[serviceId] : null;
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -169,6 +171,18 @@ const ServiceDetail: React.FC = () => {
     if (!serviceData && serviceId) {
       navigate('/#services');
     }
+
+    // Initialize animations
+    const cleanup = initializeAnimations();
+
+    // Play video when component mounts
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log('Autoplay was prevented:', error);
+      });
+    }
+
+    return cleanup;
   }, [serviceId, serviceData, navigate]);
 
   if (!serviceData) {
@@ -190,7 +204,7 @@ const ServiceDetail: React.FC = () => {
           </Button>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div>
+            <div className="animate-on-scroll">
               <span className="inline-block text-sm font-medium text-brand-500 uppercase tracking-wider mb-2">
                 ROSS Solutions
               </span>
@@ -201,7 +215,7 @@ const ServiceDetail: React.FC = () => {
                 <h3 className="text-xl font-semibold mb-4">Key Features</h3>
                 <ul className="space-y-3">
                   {serviceData.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
+                    <li key={index} className="flex items-start staggered-item">
                       <div className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center mr-3 mt-0.5">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -231,34 +245,39 @@ const ServiceDetail: React.FC = () => {
               </div>
             </div>
 
-            <div className="relative">
+            <div className="relative animate-on-scroll">
               <div className="aspect-video rounded-xl overflow-hidden">
                 <img 
                   src={serviceData.imageUrl} 
                   alt={serviceData.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover image-fade-in"
                 />
               </div>
             </div>
           </div>
 
-          <div className="mt-16">
+          <div className="mt-16 animate-on-scroll">
             <h2 className="text-2xl md:text-3xl font-bold text-brand-900 mb-8">See It In Action</h2>
-            <div className="aspect-video rounded-xl overflow-hidden border shadow-lg">
-              <iframe
-                width="100%"
-                height="100%"
-                src={serviceData.videoUrl}
-                title={`${serviceData.title} Video`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              ></iframe>
+            <div className="aspect-video rounded-xl overflow-hidden border shadow-lg bg-black">
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover"
+                autoPlay
+                playsInline
+                muted
+                loop
+                controls
+              >
+                <source src={serviceData.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
+            <p className="text-sm text-brand-500 mt-2 italic">
+              Video showcasing our {serviceData.title} solutions in action
+            </p>
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-16 text-center animate-on-scroll">
             <h2 className="text-2xl md:text-3xl font-bold text-brand-900 mb-4">Ready to Transform Your Business?</h2>
             <p className="text-xl text-brand-700 mb-8 max-w-3xl mx-auto">
               Contact our team of experts to learn how our {serviceData.title} solutions can help your organization.
