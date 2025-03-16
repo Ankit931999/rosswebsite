@@ -49,7 +49,18 @@ export const Footer: React.FC = () => {
 
           <FooterSection title="Services">
             <ul className="space-y-3">
-              {['Digital Transformation', 'Cloud Services', 'AI & Analytics', 'Cybersecurity', 'Business Process'].map((service) => (
+              {[
+                'Digital Transformation', 
+                'Artificial Intelligence', 
+                'Cloud Services', 
+                'Cybersecurity', 
+                'Data Analytics',
+                'Application Development',
+                'Business Intelligence',
+                'CRM Services',
+                'Web Services',
+                'Software Solutions'
+              ].map((service) => (
                 <li key={service}>
                   <a 
                     href="#services" 
