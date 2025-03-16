@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -49,6 +50,21 @@ const servicesData: Record<string, ServiceData> = {
     ],
     videoUrl: '/videos/digital-transformation.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop'
+  },
+  'artificial-intelligence': {
+    id: 'artificial-intelligence',
+    title: 'Artificial Intelligence',
+    description: 'Implement AI solutions to automate processes and gain competitive advantages.',
+    longDescription: 'Our AI solutions harness the power of machine learning, natural language processing, and computer vision to transform your business operations. We develop custom AI applications that automate complex tasks, provide deep insights, and create new opportunities for innovation and growth.',
+    features: [
+      'Machine learning model development',
+      'Natural language processing',
+      'Computer vision solutions',
+      'Predictive analytics',
+      'AI integration with existing systems'
+    ],
+    videoUrl: '/videos/ai-services.mp4',
+    imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop'
   },
   'cloud-services': {
     id: 'cloud-services',

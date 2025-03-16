@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Globe, Cloud, Shield, Database, Code, BarChart, Monitor, Server, Smartphone } from 'lucide-react';
+import { Globe, Cloud, Shield, Database, Code, BarChart, Monitor, Server, Smartphone, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
@@ -56,6 +56,12 @@ export const Services: React.FC = () => {
       description: 'Reimagine your business models and processes for the digital age.',
       icon: <Globe size={24} />,
       id: 'digital-transformation'
+    },
+    {
+      title: 'Artificial Intelligence',
+      description: 'Implement AI solutions to automate processes and gain competitive advantages.',
+      icon: <Brain size={24} />,
+      id: 'artificial-intelligence'
     },
     {
       title: 'Cloud Services',
