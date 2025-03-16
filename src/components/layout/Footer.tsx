@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Instagram, Send } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="flex flex-col space-y-4">
@@ -10,10 +11,19 @@ const FooterSection = ({ title, children }: { title: string; children: React.Rea
 );
 
 export const Footer: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const navigateTo = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const isHomePage = location.pathname === '/';
+    
+    if (isHomePage) {
+      const element = document.querySelector(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate('/' + sectionId);
     }
   };
 
@@ -22,10 +32,18 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="flex flex-col space-y-4">
-            <a href="#" className="inline-block" onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}>
+            <a 
+              href="#" 
+              className="inline-block" 
+              onClick={(e) => {
+                e.preventDefault();
+                if (location.pathname === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                  navigate('/');
+                }
+              }}
+            >
               <span className="font-bold text-xl text-brand-900">ROSS<span className="text-brand-500">.</span></span>
             </a>
             <p className="text-brand-700 max-w-xs">

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface NavItem {
   label: string;
@@ -20,7 +21,9 @@ const navItems: NavItem[] = [
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
@@ -48,12 +51,22 @@ export const Navbar: React.FC = () => {
     e.preventDefault();
     if (isOpen) setIsOpen(false);
     
+    const isHomePage = location.pathname === '/';
+    
     if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (isHomePage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+      }
     } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      if (isHomePage) {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/' + href);
       }
     }
   };
@@ -86,7 +99,13 @@ export const Navbar: React.FC = () => {
                 {item.label}
               </a>
             ))}
-            <Button onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button onClick={() => {
+              if (location.pathname === '/') {
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                navigate('/#contact');
+              }
+            }}>
               Get Started
             </Button>
           </nav>
@@ -122,7 +141,11 @@ export const Navbar: React.FC = () => {
             ))}
             <Button onClick={() => {
               setIsOpen(false);
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              if (location.pathname === '/') {
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                navigate('/#contact');
+              }
             }}>
               Get Started
             </Button>
