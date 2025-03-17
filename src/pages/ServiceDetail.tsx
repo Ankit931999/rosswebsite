@@ -23,7 +23,6 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import ServiceConsultationForm from '@/components/forms/ServiceConsultationForm';
 
-// Define service data type
 interface ServiceData {
   id: string;
   title: string;
@@ -34,7 +33,6 @@ interface ServiceData {
   imageUrl: string;
 }
 
-// Service data for each service type
 const servicesData: Record<string, ServiceData> = {
   'digital-transformation': {
     id: 'digital-transformation',
@@ -188,7 +186,6 @@ const servicesData: Record<string, ServiceData> = {
   }
 };
 
-// Form schema for cybersecurity consultation
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -208,7 +205,6 @@ const formSchema = z.object({
   }),
 });
 
-// Custom form component for cybersecurity page
 const CybersecurityForm = () => {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -224,16 +220,11 @@ const CybersecurityForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // This would be replaced with actual form submission logic
     console.log(values);
-    
-    // Show success message
     toast({
       title: "Consultation request submitted",
       description: "Thank you! Our cybersecurity team will contact you shortly.",
     });
-    
-    // Reset form
     form.reset();
   }
 
@@ -362,24 +353,16 @@ const ServiceDetail: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
-    
-    // If service doesn't exist, redirect to services section on home page
     if (!serviceData && serviceId) {
       navigate('/#services');
     }
-
-    // Initialize animations
     const cleanup = initializeAnimations();
-
-    // Play video when component mounts
     if (videoRef.current) {
       videoRef.current.play().catch(error => {
         console.log('Autoplay was prevented:', error);
       });
     }
-
     return cleanup;
   }, [serviceId, serviceData, navigate]);
 
@@ -475,8 +458,7 @@ const ServiceDetail: React.FC = () => {
             </p>
           </div>
 
-          {/* Service Consultation Form Section - Add for all services */}
-          <div className="mt-16 animate-on-scroll">
+          <div id="service-consultation-form" className="mt-16 animate-on-scroll">
             <ServiceConsultationForm serviceName={serviceData.title} />
           </div>
         </div>

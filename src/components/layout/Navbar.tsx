@@ -123,12 +123,28 @@ export const Navbar: React.FC = () => {
     if (isOpen) setIsOpen(false);
     
     const isHomePage = location.pathname === '/';
+    const isServicePage = location.pathname.includes('/services/');
     
     if (href === '#') {
       if (isHomePage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         navigate('/');
+      }
+    } else if (href === '#contact') {
+      if (isHomePage) {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (isServicePage) {
+        // If on a service page, scroll to the service consultation form
+        const consultationForm = document.querySelector('#service-consultation-form');
+        if (consultationForm) {
+          consultationForm.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/#contact');
       }
     } else {
       if (isHomePage) {
