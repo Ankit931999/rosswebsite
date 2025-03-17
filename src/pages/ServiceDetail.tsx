@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -22,6 +21,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import ServiceConsultationForm from '@/components/forms/ServiceConsultationForm';
 
 // Define service data type
 interface ServiceData {
@@ -437,11 +437,9 @@ const ServiceDetail: React.FC = () => {
               </div>
 
               <div className="mt-12">
-                {serviceId !== 'cybersecurity' && (
-                  <Button size="lg" onClick={() => navigate('/contact')}>
-                    Get Started
-                  </Button>
-                )}
+                <Button size="lg" onClick={() => navigate('/contact')}>
+                  Get Started
+                </Button>
               </div>
             </div>
 
@@ -477,21 +475,10 @@ const ServiceDetail: React.FC = () => {
             </p>
           </div>
 
-          {serviceId === 'cybersecurity' ? (
-            <div className="mt-16 animate-on-scroll">
-              <CybersecurityForm />
-            </div>
-          ) : (
-            <div className="mt-16 text-center animate-on-scroll">
-              <h2 className="text-2xl md:text-3xl font-bold text-brand-900 mb-4">Ready to Transform Your Business?</h2>
-              <p className="text-xl text-brand-700 mb-8 max-w-3xl mx-auto">
-                Contact our team of experts to learn how our {serviceData.title} solutions can help your organization.
-              </p>
-              <Button size="lg" onClick={() => navigate('/contact')}>
-                Contact Us
-              </Button>
-            </div>
-          )}
+          {/* Service Consultation Form Section - Add for all services */}
+          <div className="mt-16 animate-on-scroll">
+            <ServiceConsultationForm serviceName={serviceData.title} />
+          </div>
         </div>
       </main>
       <Footer />
