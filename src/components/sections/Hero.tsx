@@ -61,7 +61,7 @@ export const Hero: React.FC = () => {
               <Button 
                 size="lg" 
                 className="group"
-                onClick={() => scrollToSection('#services')}
+                onClick={() => scrollToSection('#contact')}
               >
                 Get Started 
                 <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
