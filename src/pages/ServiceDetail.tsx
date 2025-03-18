@@ -453,9 +453,6 @@ const ServiceDetail: React.FC = () => {
                 Your browser does not support the video tag.
               </video>
             </div>
-            <p className="text-sm text-brand-500 mt-2 italic">
-              Video showcasing our {serviceData.title} solutions in action
-            </p>
           </div>
 
           <div id="service-consultation-form" className="mt-16 animate-on-scroll">
