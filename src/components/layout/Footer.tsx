@@ -102,7 +102,6 @@ export const Footer: React.FC = () => {
                 { name: 'Leadership', section: '#about' },
                 { name: 'Careers', section: '#services' },
                 { name: 'News & Events', section: '#services' },
-                { name: 'Investors', section: '#about' },
                 { name: 'Sustainability', section: '#about' }
               ].map((item) => (
                 <li key={item.name}>
