@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -194,17 +195,6 @@ export const Navbar: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors"
-                onClick={(e) => handleNavigation(e, item.href)}
-              >
-                {item.label}
-              </a>
-            ))}
-            
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -246,6 +236,17 @@ export const Navbar: React.FC = () => {
               </NavigationMenuList>
             </NavigationMenu>
             
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors"
+                onClick={(e) => handleNavigation(e, item.href)}
+              >
+                {item.label}
+              </a>
+            ))}
+            
             <Button onClick={() => {
               if (location.pathname === '/') {
                 document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -276,17 +277,6 @@ export const Navbar: React.FC = () => {
       >
         <div className="container mx-auto px-4 py-4">
           <nav className="flex flex-col space-y-4">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors py-2"
-                onClick={(e) => handleNavigation(e, item.href)}
-              >
-                {item.label}
-              </a>
-            ))}
-            
             <div className="py-2">
               <div 
                 className="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors py-2 cursor-pointer"
@@ -311,6 +301,17 @@ export const Navbar: React.FC = () => {
                 ))}
               </div>
             </div>
+            
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors py-2"
+                onClick={(e) => handleNavigation(e, item.href)}
+              >
+                {item.label}
+              </a>
+            ))}
             
             <Button onClick={() => {
               setIsOpen(false);
