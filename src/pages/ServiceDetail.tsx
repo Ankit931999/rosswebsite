@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -453,6 +454,7 @@ const ServiceDetail: React.FC = () => {
                 Your browser does not support the video tag.
               </video>
             </div>
+            {/* The text line below the video has been removed */}
           </div>
 
           <div id="service-consultation-form" className="mt-16 animate-on-scroll">
