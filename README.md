@@ -67,3 +67,8 @@ Simply open [Lovable](https://lovable.dev/projects/5305f6fd-0f09-44b8-9170-c486d
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+Website using Ai-Agents to help Customers
+
+In the first step we are designing the pages of the website and making it more interactive we will be using react i am first using the html to design the page and add functionality.
+I will be using the Amazon S3 bucket to store the videos and photographs which gives access to host the videos in the website. Keeping in mind when you create the bucket do look for the permissions and allow every photo and videos to read and confirm ALC to public so that the videos are accessible.
+I will be using the Amazon Dyanmo DB to store the database.
