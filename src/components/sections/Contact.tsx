@@ -68,7 +68,7 @@ export const Contact = () => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your name" {...field} />
+                      <Input placeholder="Your name" className="bg-white" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,7 +81,7 @@ export const Contact = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your email" type="email" {...field} />
+                      <Input placeholder="Your email" type="email" className="bg-white" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -96,7 +96,7 @@ export const Contact = () => {
                     <FormControl>
                       <Textarea
                         placeholder="Your message"
-                        className="resize-none"
+                        className="resize-none bg-white"
                         {...field}
                       />
                     </FormControl>
