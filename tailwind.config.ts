@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -65,16 +64,16 @@ export default {
 				},
 				// Custom colors
 				brand: {
-					50: '#e0f2fe',
-					100: '#bae6fd',
-					200: '#7dd3fc',
-					300: '#38bdf8',
-					400: '#0ea5e9',
-					500: '#0284c7',
-					600: '#0369a1',
-					700: '#075985',
-					800: '#0c4a6e',
-					900: '#0f172a',
+					50: '#ffebe6',
+					100: '#ffd6cc',
+					200: '#ffad99',
+					300: '#ff8566',
+					400: '#ff5c33',
+					500: '#ff3300',
+					600: '#cc2900',
+					700: '#991f00',
+					800: '#661400',
+					900: '#330a00',
 				}
 			},
 			borderRadius: {

@@ -33,12 +33,12 @@ export const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16">
       {/* Background effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-brand-50 to-blue-50 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-50 to-brand-100 z-0"></div>
       <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-10"></div>
       
       {/* Floating Elements in Background */}
       <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-brand-200/20 blur-3xl animate-float z-0"></div>
-      <div className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full bg-blue-200/20 blur-3xl animate-float z-0" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full bg-brand-300/20 blur-3xl animate-float z-0" style={{ animationDelay: '2s' }}></div>
       
       <div 
         ref={elementRef} 
@@ -92,7 +92,7 @@ export const Hero: React.FC = () => {
           
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
             <div className="relative">
-              <div className="absolute inset-0 bg-brand-200/30 blur-xl rounded-full transform -translate-x-4 translate-y-4"></div>
+              <div className="absolute inset-0 bg-brand-300/30 blur-xl rounded-full transform -translate-x-4 translate-y-4"></div>
               <div className="glass-card relative overflow-hidden rounded-2xl w-full max-w-md aspect-square">
                 <img 
                   src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
